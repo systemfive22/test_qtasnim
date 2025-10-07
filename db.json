@@ -1,0 +1,12 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "dddd",
+      "position": "Software Engineer",
+      "salary": 12000000,
+      "address": "Jakarta",
+      "phone": "08123456789"
+    }
+  ]
+}

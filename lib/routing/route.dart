@@ -19,6 +19,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: SettingsRoute.page),
       ],
     ),
+    AutoRoute(page: AddEditEmployeeRoute.page),
   ];
 }
 

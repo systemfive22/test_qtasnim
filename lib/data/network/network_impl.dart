@@ -14,11 +14,28 @@ class NetworkImplement implements NetworkInterfaces {
   appInterceptor() {
     _dio.interceptors.clear();
     _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          var customHeaders = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+          };
+          options.headers.addAll(customHeaders);
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          return handler.next(response);
+        },
+        onError: (DioException e, handler) {
+          return handler.next(e);
+        },
+      ),
+    );
+    _dio.interceptors.add(
       RetryInterceptor(
         dio: _dio,
         retries: 3, // retry count (optional)
         retryDelays: const [
-          // set delays between retries (optional)
           Duration(seconds: 1), // wait 1 sec before first retry
           Duration(seconds: 2), // wait 2 sec before second retry
           Duration(seconds: 3), // wait 3 sec before third retry
@@ -26,6 +43,30 @@ class NetworkImplement implements NetworkInterfaces {
       ),
     );
     LogNetwork.log(_dio);
+  }
+
+  Future<Response> postRaw({String? url, Map<String, dynamic>? body}) async {
+    try {
+      appInterceptor();
+      Response res = await _dio.post(
+        url!,
+        data: body,
+        options: Options(contentType: Headers.jsonContentType),
+      );
+      return res;
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.badResponse) {
+        throw e.response!.data["message"];
+      } else if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout ||
+          e.type == DioExceptionType.sendTimeout) {
+        throw FetchException("Request time out");
+      } else {
+        throw 'Tidak ada koneksi internet';
+      }
+    } on SocketException {
+      throw 'Tidak ada koneksi internet';
+    }
   }
 
   @override
@@ -80,7 +121,7 @@ class NetworkImplement implements NetworkInterfaces {
       Response res = await _dio.put(
         url,
         data: body,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
+        options: Options(contentType: Headers.jsonContentType),
       );
       return res;
     } on DioException catch (e) {

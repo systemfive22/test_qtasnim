@@ -19,10 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _loadInitialData();
   }
-
-  void _loadInitialData() {}
 
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
                     title: 'Test Qtasnim',
                     debugShowCheckedModeBanner: false,
                     localeResolutionCallback: (locale, supportedLocales) {
-                      // Check if the current device locale is supported
                       for (var supportedLocale in supportedLocales) {
                         if (supportedLocale.languageCode ==
                                 locale?.languageCode &&

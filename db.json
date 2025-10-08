@@ -2,19 +2,43 @@
   "employees": [
     {
       "id": 1,
-      "name": "Imam Akbar Mega AR",
+      "name": "Budi Santoso",
       "position": "Software Engineer",
-      "salary": 12000000,
-      "address": "Jakarta",
-      "phone": "08123456789"
+      "salary": 8500000,
+      "address": "Jl. Merpati No. 12, Jakarta",
+      "phone": "081234567890"
     },
     {
       "id": 2,
-      "name": "Budi Santoso",
-      "position": "Product Manager",
-      "salary": 15000000,
-      "address": "Bandung",
-      "phone": "08129876543"
+      "name": "Siti Aminah",
+      "position": "UI/UX Designer",
+      "salary": 7500000,
+      "address": "Jl. Kenanga No. 45, Bandung",
+      "phone": "082345678901"
+    },
+    {
+      "id": 3,
+      "name": "Andi Wijaya",
+      "position": "Project Manager",
+      "salary": 12000000,
+      "address": "Jl. Melati No. 9, Surabaya",
+      "phone": "083456789012"
+    },
+    {
+      "id": 4,
+      "name": "Dewi Lestari",
+      "position": "QA Engineer",
+      "salary": 7000000,
+      "address": "Jl. Mawar No. 88, Yogyakarta",
+      "phone": "084567890123"
+    },
+    {
+      "id": 5,
+      "name": "Rudi Hartono",
+      "position": "DevOps Engineer",
+      "salary": 9500000,
+      "address": "Jl. Anggrek No. 21, Semarang",
+      "phone": "085678901234"
     }
   ]
 }

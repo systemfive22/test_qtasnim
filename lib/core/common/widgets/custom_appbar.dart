@@ -8,6 +8,7 @@ AppBar customAppBar({
   String title = "",
   bool isDrawer = false,
   Widget? action,
+  PreferredSizeWidget? bottom, // 🔥 tambah ini
 }) {
   return AppBar(
     backgroundColor: MyTheme.color.cardBlackWhite(context!),
@@ -46,5 +47,6 @@ AppBar customAppBar({
         if (action != null) ...[action],
       ],
     ),
+    bottom: bottom, // 🔥 inilah yang bikin bisa ada widget di bawah appbar
   );
 }

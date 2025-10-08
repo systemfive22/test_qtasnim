@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:test_qtasnim/core/common/widgets/custom_appbar.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -8,13 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {},
-          child: const Text('Go to Post Screen'),
-        ),
-      ),
+      appBar: customAppBar(title: 'Home', isDrawer: true, context: context),
+      body: Container(),
     );
   }
 }

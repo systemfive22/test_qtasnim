@@ -16,6 +16,11 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../core/utils/env/env.dart' as _i803;
 import '../core/utils/env/env_development.dart' as _i3;
 import '../data/network/network_impl.dart' as _i661;
+import '../data/repositories/employee_repository.dart' as _i1030;
+import '../features/main_screen/navigation_bottom_cubit/navigation_bottom_cubit.dart'
+    as _i27;
+import '../features/setting/theme_cubit/theme_cubit.dart' as _i184;
+import '../routing/route.dart' as _i290;
 import 'app_module.dart' as _i460;
 
 const String _development = 'development';
@@ -32,9 +37,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i3.EnvDevelopment(),
       registerFor: {_development},
     );
+    gh.factory<_i184.ThemeCubit>(() => _i184.ThemeCubit());
+    gh.factory<_i27.NavigationBottomCubit>(() => _i27.NavigationBottomCubit());
     gh.lazySingleton<_i361.Dio>(() => registerModule.dio());
+    gh.lazySingleton<_i290.AppRouter>(() => _i290.AppRouter());
     gh.lazySingleton<_i661.NetworkImplement>(
       () => _i661.NetworkImplement(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1030.EmployeeRepository>(
+      () => _i1030.EmployeeRepository(
+        networkImplement: gh<_i661.NetworkImplement>(),
+      ),
     );
     return this;
   }

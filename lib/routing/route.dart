@@ -1,20 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:test_qtasnim/routing/route.gr.dart';
+import 'package:injectable/injectable.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+@lazySingleton
 class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => const RouteType.cupertino();
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page, initial: true),
-
-    AutoRoute(page: SettingRoute.page),
+    AutoRoute(
+      page: MainRoute.page,
+      initial: true,
+      children: [
+        AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: SettingsRoute.page),
+      ],
+    ),
   ];
-  @override
-  List<AutoRouteGuard> get guards => [];
 }
 
 Widget slideFromRightTransition(

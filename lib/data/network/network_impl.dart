@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 import 'package:test_qtasnim/data/network/exception/api_exception.dart';

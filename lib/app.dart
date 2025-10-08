@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_qtasnim/config/app_config.dart';
 import 'package:test_qtasnim/di/app_module.dart';
+import 'package:test_qtasnim/features/setting/theme_cubit/theme_cubit.dart';
 import 'package:test_qtasnim/list_bloc_provider.dart';
 import 'package:test_qtasnim/routing/route.dart';
 
@@ -28,41 +28,47 @@ class MyApp extends StatelessWidget {
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (context, _) {
-              return MaterialApp.router(
-                routerConfig: appRoute.config(
-                  navigatorObservers: () => [AutoRouterObserver()],
-                  deepLinkBuilder: (deepLink) {
-                    if (deepLink.path.startsWith("/invoice")) {
-                      /// Do something
-                      return deepLink;
-                    } else {
-                      return DeepLink.defaultPath;
-                    }
-                  },
-                ),
-                theme: AppTheme.lightTheme,
-                darkTheme: AppTheme.darkTheme,
-                themeMode: ThemeMode.system,
-                title: 'Test Qtasnim',
-                debugShowCheckedModeBanner: false,
-                localeResolutionCallback: (locale, supportedLocales) {
-                  // Check if the current device locale is supported
-                  for (var supportedLocale in supportedLocales) {
-                    if (supportedLocale.languageCode == locale?.languageCode &&
-                        supportedLocale.countryCode == locale?.countryCode) {
-                      return supportedLocale;
-                    }
-                  }
-                  // If the locale of the device is not supported, use the first one
-                  return supportedLocales.first;
-                },
-                builder: (ctx, child) {
-                  return MediaQuery(
-                    data: MediaQuery.of(ctx).copyWith(),
-                    child: ScrollConfiguration(
-                      behavior: MyBehavior(),
-                      child: child!,
+              return BlocBuilder<ThemeCubit, ThemeState>(
+                builder: (context, state) {
+                  return MaterialApp.router(
+                    routerConfig: appRoute.config(
+                      navigatorObservers: () => [AutoRouterObserver()],
+                      deepLinkBuilder: (deepLink) {
+                        if (deepLink.path.startsWith("/invoice")) {
+                          /// Do something
+                          return deepLink;
+                        } else {
+                          return DeepLink.defaultPath;
+                        }
+                      },
                     ),
+                    theme: ThemeData.light(),
+                    darkTheme: ThemeData.dark(),
+                    themeMode: state.themeMode,
+                    title: 'Test Qtasnim',
+                    debugShowCheckedModeBanner: false,
+                    localeResolutionCallback: (locale, supportedLocales) {
+                      // Check if the current device locale is supported
+                      for (var supportedLocale in supportedLocales) {
+                        if (supportedLocale.languageCode ==
+                                locale?.languageCode &&
+                            supportedLocale.countryCode ==
+                                locale?.countryCode) {
+                          return supportedLocale;
+                        }
+                      }
+                      // If the locale of the device is not supported, use the first one
+                      return supportedLocales.first;
+                    },
+                    builder: (ctx, child) {
+                      return MediaQuery(
+                        data: MediaQuery.of(ctx).copyWith(),
+                        child: ScrollConfiguration(
+                          behavior: MyBehavior(),
+                          child: child!,
+                        ),
+                      );
+                    },
                   );
                 },
               );

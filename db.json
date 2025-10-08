@@ -2,11 +2,19 @@
   "employees": [
     {
       "id": 1,
-      "name": "dddd",
+      "name": "Imam Akbar Mega AR",
       "position": "Software Engineer",
       "salary": 12000000,
       "address": "Jakarta",
       "phone": "08123456789"
+    },
+    {
+      "id": 2,
+      "name": "Budi Santoso",
+      "position": "Product Manager",
+      "salary": 15000000,
+      "address": "Bandung",
+      "phone": "08129876543"
     }
   ]
 }

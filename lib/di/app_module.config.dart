@@ -19,6 +19,7 @@ import '../data/network/network_impl.dart' as _i661;
 import '../data/repositories/employee_repository.dart' as _i1030;
 import '../features/home/add_employee_screen/add_employee_bloc/add_employee_bloc.dart'
     as _i988;
+import '../features/home/employee_bloc/employee_bloc.dart' as _i937;
 import '../features/main_screen/navigation_bottom_cubit/navigation_bottom_cubit.dart'
     as _i27;
 import '../features/setting/theme_cubit/theme_cubit.dart' as _i184;
@@ -53,6 +54,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i988.AddEmployeeBloc>(
       () => _i988.AddEmployeeBloc(
+        employeeRepository: gh<_i1030.EmployeeRepository>(),
+      ),
+    );
+    gh.factory<_i937.EmployeeBloc>(
+      () => _i937.EmployeeBloc(
         employeeRepository: gh<_i1030.EmployeeRepository>(),
       ),
     );
